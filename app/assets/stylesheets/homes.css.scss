@@ -1,3 +1,106 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// Place all the styles related to the homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.main{
+	font-family: 'Raleway', sans-serif;
+	min-height:1500px;
+	height:100%;
+	background-image: image-url("mortcalc-background.jpg");
+	background-size:cover;
+}
+
+html {
+	font-family: 'Raleway', sans-serif;
+}
+
+.body-background{
+	margin-top:60px;
+	padding:40px;
+	background-color:rgba(0, 0, 0, 0.600);
+}
+
+.title-new{
+	color:white;
+	font-weight:bold;
+	text-align:center;
+	font-size:28px;
+	padding:20px;
+}
+
+#input-new{
+	font-size:18px;
+	color:white;
+	margin-bottom:10px;
+}
+
+.original-submit{
+	display: block;
+	border:none;
+	background:transparent;
+	text-decoration: none;
+	color:white;
+}
+
+.input-field{
+	background:rgba(242, 107, 121, 1.000) !important;
+	border:none !important;
+	text-decoration: none !important;
+	border-radius:none !important;
+	color:black !important;
+}
+
+.input-field:hover{
+	background-color:rgba(242, 175, 176, 1.000) !important;
+}
+
+.results-title{
+	color:white;
+	font-weight:bold;
+	text-align:center;
+	font-size:28px;
+	padding:20px;
+}
+
+.results-p1{
+	color:white;
+	margin-top:60px;
+	padding:40px;
+	background-color:rgba(87, 43, 117, 0.400);
+}
+
+.results-p2{
+	color:white;
+	margin-top:60px;
+	padding:40px;
+	background-color:rgba(195, 109, 96, 0.400);
+}
+
+.results-p3{
+	color:white;
+	margin-top:60px;
+	padding:40px;
+	background-color:rgba(113, 195, 188, 0.400);	
+}
+
+.results-p4{
+	color:white;
+	margin-top:60px;
+	padding:40px;
+	background-color:rgba(222, 199, 134, 0.400);
+}
+
+.title{
+	color:#525355;
+	margin-top:40px;
+	font-size:36px;
+	text-align:center;
+	font-weight:bold;
+}
+
+.about-sonyma{
+	text-align:center;
+}

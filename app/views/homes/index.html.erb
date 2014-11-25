@@ -1,4 +1,4 @@
-<h1>Listing homes</h1>
+<center><h1>Welcome to My Mortgage Dashboard</h1></center>
 
 <table>
   <thead>
@@ -10,16 +10,25 @@
   </thead>
 
   <tbody>
+	
+	<center>
+	<%= link_to new_home_path, :class => "btn btn-primary btn-lg" do %>
+	<%= 'New Client' %>
+	<% end %>
+	</center>
+	
+	<h2>All Clients</h2>
+
     <% @homes.each do |home| %>
       <tr>
+		<td>Client:</td>
+		<td><%= home.name %></td>
         <td><%= link_to 'Show', home %></td>
         <td><%= link_to 'Edit', edit_home_path(home) %></td>
-        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Home', new_home_path %>

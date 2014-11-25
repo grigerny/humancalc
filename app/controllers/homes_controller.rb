@@ -10,6 +10,8 @@ class HomesController < ApplicationController
   # GET /homes/1
   # GET /homes/1.json
   def show
+    @home = Home.find(params[:id])
+    @regions = Region.all
   end
 
   # GET /homes/new
