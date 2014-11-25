@@ -6,8 +6,6 @@
 
 OK <%= @home.name %>, here are your numbers!<br>
 </div>
-
-
 <% loan = (@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) * 0.97 %>
 <% i = (1 + 4.25.to_f/100/12)**(12/12)-1 %>
 <% annuity = (1-(1/(1+i))**360)/i %>
@@ -15,27 +13,26 @@ OK <%= @home.name %>, here are your numbers!<br>
 
 
 <div class="results-p1">
+	<h1>Income</h1>
 	First, let's see if your income qualifies for the NYS Achieve Your Dream Program:<br><br>
 	You told me your income is <%= number_to_currency(@home.income) %> per year.
 	The annual income limit for <%= @home.region.name %> is <%= number_to_currency(@home.region.income_limit)%>. <br><br>
 	
 	<% if @home.income.to_i <= @home.region.income_limit.to_i %>
 
-	Your income qualifies for NY State's Achieve The Dream Program for homes being purchased in New York City. For other neighborhoods and more details on income requirements <%= link_to "click here", "http://www.nyshcr.org/Topics/Home/Buyers/IncomeLimits/AchievingtheDreamProgram.htm"%><br><br>
+	Congratulations, your income qualifies for NY State's Achieve The Dream Program for homes being purchased in <%= @home.region.name %>. For other neighborhoods and more details on income requirements <%= link_to "click here", "http://www.nyshcr.org/Topics/Home/Buyers/IncomeLimits/AchievingtheDreamProgram.htm"%><br><br>
 	
 	<% else %>
 	
 	Unfortunately, your income is higher than NY State's Achieve The Dream Program for homes being purchased in <%= @home.region.name %>. For other neighborhoods and more details on income requirements <%= link_to "click here", "http://www.nyshcr.org/Topics/Home/Buyers/IncomeLimits/AchievingtheDreamProgram.htm"%><br><br>
 	
 	<% end %>
-	
-
 </div>
 
 
-
-
 <div class="results-p2">
+	<h1>Borrowing Costs</h1>
+	
 	You told me the asking price is <%= number_to_currency(@home.asking_price.gsub(/\D/, '')) %>
 	and the seller's concession is <%= @home.seller_con %> which equates to <%= number_to_currency(@home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_f/100) %>.<br>
 	Therefore, your purchase contract will be for <%= number_to_currency(@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) %>.<br><br>
@@ -51,6 +48,7 @@ With SONYMA'S Downpayment Assistance Loan Program (DALP), the state will assist 
 
 
 <div class="results-p3">
+	<h1>Monthly Payment</h1>
 Based off of the current SONYMA interest rate of 4.25% and a 30 year loan, your monthly mortgage payment will be
 
 <%= payment = number_to_currency(loan/annuity) %> <br><br>
