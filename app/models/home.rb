@@ -1,3 +1,3 @@
 class Home < ActiveRecord::Base
-  attr_accessible :asking_price
+  attr_accessible :asking_price, :seller_con, :contract_price, :name, :rate, :re_taxes, :region_id, :ho_insurance, :income
 end
