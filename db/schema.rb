@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125170647) do
+ActiveRecord::Schema.define(version: 20141125175427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20141125170647) do
     t.string   "ho_insurance"
     t.string   "income"
     t.integer  "region_id"
+    t.string   "monthly_expenses"
   end
 
   create_table "regions", force: true do |t|

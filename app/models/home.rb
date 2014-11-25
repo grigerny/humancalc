@@ -1,6 +1,6 @@
 class Home < ActiveRecord::Base
   belongs_to :region
-  attr_accessible :asking_price, :seller_con, :contract_price, :name, :rate, :re_taxes, :region_id, :ho_insurance, :income
+  attr_accessible :asking_price, :seller_con, :contract_price, :name, :rate, :re_taxes, :region_id, :ho_insurance, :income, :monthly_expenses
   
   validates :asking_price, :name, :presence => true
   validates :income, :presence => true 
