@@ -14,7 +14,7 @@ OK <%= @home.name %>, here are your numbers!<br>
 
 <div class="results-p1">
 	<h1>Income</h1>
-	First, let's see if your income qualifies for the NYS Achieve Your Dream Program:<br><br>
+	1. First, let's see if your income qualifies for the NYS Achieve Your Dream Program:<br><br>
 	You told me your income is <%= number_to_currency(@home.income) %> per year.
 	The annual income limit for <%= @home.region.name %> is <%= number_to_currency(@home.region.income_limit)%>. <br><br>
 	
@@ -27,43 +27,59 @@ OK <%= @home.name %>, here are your numbers!<br>
 	Unfortunately, your income is higher than NY State's Achieve The Dream Program for homes being purchased in <%= @home.region.name %>. For other neighborhoods and more details on income requirements <%= link_to "click here", "http://www.nyshcr.org/Topics/Home/Buyers/IncomeLimits/AchievingtheDreamProgram.htm"%><br><br>
 	
 	<% end %>
+	
+	
+	2. Now let's take a look at your monthly expenses, and see how they compare to your monthly income. <br><br>Right now, your monthly expenses are <%= number_to_currency(@home.monthly_expenses) %> and your monthly income is <%= number_to_currency(@home.income.to_i/12) %>. This means that as of today, your current (DTI) Debt To Income Ratio is <%= ((@home.monthly_expenses.to_f/(@home.income.to_i/12.to_f))*100).round(2)%>%.<br><br>
+	
+In order to qualify for this loan, after we add your new mortgage payment to your existing monthly expenses, your total DTI ratio must be under 45%. <br>In the monthly payment section below, you will see whether or not you are within the 45% DTI threshold.
+	
+	
 </div>
 
 
 <div class="results-p2">
 	<h1>Borrowing Costs</h1>
 	
-	You told me the asking price is <%= number_to_currency(@home.asking_price.gsub(/\D/, '')) %>
+3. You told me the asking price is <%= number_to_currency(@home.asking_price.gsub(/\D/, '')) %>
 	and the seller's concession is <%= @home.seller_con %> which equates to <%= number_to_currency(@home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_f/100) %>.<br>
 	Therefore, your purchase contract will be for <%= number_to_currency(@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) %>.<br><br>
 	
-Based on SONYMA Guidelines, you can borrow up to 97% of the value. This is also known as the loan to value ratio. <br>
+4. Based on SONYMA Guidelines, you can borrow up to 97% of the value. This is also known as the loan to value ratio. <br>
 So, if your purchase contract is <%= number_to_currency(@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) %>, and you can borrow 97% of that, you can actually mortgage up to <%= loan_amount = number_to_currency((@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) * 0.97) %>.<br><br>
 
-Your minimum downpayment is <%= number_to_currency((@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) - ((@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) * 0.97)) %>.<br><br>
+5. Your minimum downpayment is <%= number_to_currency((@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) - ((@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) * 0.97)) %>.<br><br>
 
-With SONYMA'S Downpayment Assistance Loan Program (DALP), the state will assist you with 3% of the home purchase price (up to a maximum of $15,000). 
+6. With SONYMA'S Downpayment Assistance Loan Program (DALP), the state will assist you with 3% of the home purchase price (up to a maximum of $15,000) which you can use towards your downpayment. 
 
 </div>
 
 
 <div class="results-p3">
 	<h1>Monthly Payment</h1>
-Based off of the current SONYMA interest rate of 4.25% and a 30 year loan, your monthly mortgage payment will be
+7. Based off of the current SONYMA interest rate of 4.25% and a 30 year loan, your monthly mortgage payment will be
 
 <%= payment = number_to_currency(loan/annuity) %> <br><br>
 
 
-Other Housing Expenses:<br>
+8. Now let's look at your other Housing Expenses:<br>
 You told me the Real Estate taxes are: <%= number_to_currency(@home.re_taxes) %> per year<br>
 Based on US national average data, I have estimated your Homeowner's Insurance to be <%= hinsurance = number_to_currency(0.0035*loan) %> per year<br>
 PMI (Private Mortgage Insurance) is required for all loans that exceed 80% loan to value. The PMI for this loan is <%=  number_to_currency(((@home.asking_price.gsub(/\D/, '').to_i + @home.asking_price.gsub(/\D/, '').to_i * @home.seller_con.to_i/100) * 0.97) * 0.01) %> per year
 <br><br>
 
 
-Total:<br>
+9. Total:<br>
 Your total Mortgage Payment including Principle, Interest, Real Estate Tax, Homeowners Insurance and Private Mortgage Insurance will be <%= (number_to_currency((@home.re_taxes.to_i/12) + (0.0035*loan/12) + (pmi) + (loan/annuity))) %> per month<br><br>
+
+10. Now let's see if your new DTI will be less than 45%.<br><br>
+
+Going back to the beginning we said your current monthly expenses are <%= number_to_currency(@home.monthly_expenses) %>. Now let's add your new mortgage payment of <%= (number_to_currency((@home.re_taxes.to_i/12) + (0.0035*loan/12) + (pmi) + (loan/annuity))) %> to that number. Your new monthly expenses which include your full mortgage payment are estimated to be <%=  (number_to_currency((((@home.re_taxes.to_i/12) + (0.0035*loan/12) + (pmi) + (loan/annuity)))+(@home.monthly_expenses.to_i))) %>.
+ <br><br>
+
+That means based on your new monthly expenses of <%=  (number_to_currency((((@home.re_taxes.to_i/12) + (0.0035*loan/12) + (pmi) + (loan/annuity)))+(@home.monthly_expenses.to_i))) %> and your monthly income of <%= number_to_currency(@home.income.to_i/12) %>, your final DTI is: <%= ((((((@home.re_taxes.to_i/12) + (0.0035*loan/12) + (pmi) + (loan/annuity)))+(@home.monthly_expenses.to_i))/(@home.income.to_i/12))*100).round(2)%>%
 </div>
+
+
 
 
 <div class="results-p4">
